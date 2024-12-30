@@ -24,8 +24,8 @@
             <td>{{ job.company.name }}</td>
             <td>{{ job.user.username }}</td>
             <td>
-                <a href="{% url 'edit_job' job.id %}">Edit</a>
-                <a href="{% url 'destroy_job' job.id %}">Delete</a>
+                <a href="{% url 'update' job.id %}">Edit</a>
+                <a href="create.html">Delete</a>
             </td>
         </tr>
         {% endfor %}
