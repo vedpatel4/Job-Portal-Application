@@ -3,7 +3,7 @@ from .models import Company
 from .forms import CompanyForm
 from django.contrib.auth.decorators import login_required
 
-@login_required
+@login_required # Only logged-in users can access this view
 def register(request):
     form = CompanyForm()
 
@@ -11,7 +11,7 @@ def register(request):
         form = CompanyForm(request.POST)
         if form.is_valid():
             company = form.save(commit=False)
-            company.user = request.user
+            company.user = request.user # Associate the company with the logged-in user
             company.save()
             return redirect('show')
 

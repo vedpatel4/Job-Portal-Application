@@ -33,8 +33,8 @@ def login(request):
             if user is not None:
                 auth.login(request, user)
                 if not Company.objects.filter(user=user).exists():
-                    return redirect("company_register")
-                return redirect("show")
+                    return redirect("company_register") # Redirect to company registration if not registered
+                return redirect("show")  # Redirect to show page if company is registered
     
     context = {'loginform': form}
     return render(request, 'users/login.html', context=context)
@@ -42,4 +42,4 @@ def login(request):
 
 def logout(request):
     auth.logout(request)
-    return redirect("login")
+    return redirect("login") # Redirect to login page after logout

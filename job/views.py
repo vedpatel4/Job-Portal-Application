@@ -4,7 +4,7 @@ from .forms import Create_JobForm
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponseForbidden
 
-@login_required
+@login_required  # Only logged-in users can access this view
 def create(request):
     form = Create_JobForm()
 
@@ -12,7 +12,7 @@ def create(request):
         form = Create_JobForm(request.POST)
         if form.is_valid():
             job = form.save(commit=False)
-            job.user = request.user
+            job.user = request.user  # Associate the job with the logged-in user
             job.save()
             return redirect('show')
 
@@ -23,7 +23,7 @@ def show(request):
     jobs = Job.objects.all()
     return render(request, "job/show.html", {'jobs': jobs})
 
-@login_required
+@login_required  # Only logged-in users can access this view
 def update(request, id):
     job = get_object_or_404(Job, id=id)
     if job.user != request.user:
@@ -37,7 +37,7 @@ def update(request, id):
     context = {'updatejobform': form}
     return render(request, 'job/update.html', context=context)
 
-@login_required
+@login_required  # Only logged-in users can access this view
 def delete(request, id):
     job = get_object_or_404(Job, id=id)
     if job.user != request.user:

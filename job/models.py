@@ -2,7 +2,7 @@ from django.db import models
 from django.contrib.auth.models import User
 
 class Job(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)  # Each job is associated with a user
     title = models.CharField(max_length=100)
     description = models.TextField()
     location = models.CharField(max_length=100)
