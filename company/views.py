@@ -13,7 +13,7 @@ def register(request):
             company = form.save(commit=False)
             company.user = request.user
             company.save()
-            return redirect('/')
+            return redirect('show')
 
     context = {'registerform': form}
     return render(request, 'company/register.html', context=context)

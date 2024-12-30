@@ -14,7 +14,7 @@ def create(request):
             job = form.save(commit=False)
             job.user = request.user
             job.save()
-            return redirect('/')
+            return redirect('show')
 
     context = {'createjobform': form}
     return render(request, 'job/create.html', context=context)
@@ -32,7 +32,7 @@ def update(request, id):
     form = Create_JobForm(request.POST or None, instance=job)
     if form.is_valid():
         form.save()
-        return redirect("/")
+        return redirect("show")
     
     context = {'updatejobform': form}
     return render(request, 'job/update.html', context=context)
@@ -44,4 +44,4 @@ def delete(request, id):
         return HttpResponseForbidden("You are not allowed to delete this job.")
     
     job.delete()
-    return redirect("/")
+    return redirect("show")

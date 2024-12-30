@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect
 from . forms import CreateUserForm,LoginForm
 from django.contrib.auth.models import auth
 from django.contrib.auth import authenticate, login, logout
+from company.models import Company
 
 
 def signup(request):
@@ -31,7 +32,9 @@ def login(request):
 
             if user is not None:
                 auth.login(request, user)
-                return redirect('/')
+                if not Company.objects.filter(user=user).exists():
+                    return redirect("company_register")
+                return redirect("show")
     
     context = {'loginform': form}
     return render(request, 'users/login.html', context=context)
