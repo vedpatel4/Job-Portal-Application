@@ -18,4 +18,9 @@ def create(request):
     context = {'createjobform': form}
     return render(request, 'job/create.html', context=context)
 
+def show(request):
+    jobs = Job.objects.all()
+    return render(request, "job/show.html", {'jobs': jobs})
+
+
 
