@@ -37,11 +37,11 @@ def update(request, id):
     context = {'updatejobform': form}
     return render(request, 'job/update.html', context=context)
 
-# @login_required
-# def destroy_job(request, id):
-#     job = get_object_or_404(Job, id=id)
-#     if job.user != request.user:
-#         return HttpResponseForbidden("You are not allowed to delete this job.")
+@login_required
+def delete(request, id):
+    job = get_object_or_404(Job, id=id)
+    if job.user != request.user:
+        return HttpResponseForbidden("You are not allowed to delete this job.")
     
-#     job.delete()
-#     return redirect("/")
+    job.delete()
+    return redirect("/")
