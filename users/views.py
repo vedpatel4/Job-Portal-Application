@@ -38,3 +38,8 @@ def login(request):
     
     context = {'loginform': form}
     return render(request, 'users/login.html', context=context)
+
+
+def logout(request):
+    auth.logout(request)
+    return redirect("login")
